@@ -29,12 +29,12 @@ onBeforeMount(() => {
 
 <template>
  <div class="flex">
-  <div class="m-5 max-w-min w-1/2">
-   <p class="text-2xl font-bold">query</p>
+  <div class="m-5 min-w-max w-1/2">
+   <p class="text-2xl font-bold">Query</p>
    <p class="text-lg ">Get all coursessssssssssssssssssssssssssssssssssssssssssssssssssss.</p>
    <p class="text-lg ">Get all coursessssssssssssssssssssssssssssss.</p>
   </div>
-  <div class="grid grid-cols-2 gap-4 items-center space-y-2 m-5 w-1/2">
+  <div class="grid grid-cols-2 gap-4 items-center  m-5 w-1/2">
   <!-- <div class="flex flex-wrap items-center space-y-2 m-5 max-w-fit "> -->
    <CourseList v-for="course in courses" :key="course.id" :course="course"/>
   </div>
