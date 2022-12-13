@@ -64,7 +64,7 @@ const clearValue = () => {
     <div>
 
         <div>
-            <p class="text-2xl font-bold">Add Student</p>
+            <p class="text-2xl font-bold text-center">Add Student</p>
         </div>
 
         <div class="mt-5">
