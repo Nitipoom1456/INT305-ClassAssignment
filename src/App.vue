@@ -3,6 +3,7 @@
 </script>
 
 <template>
+  
 <nav class="px-2 bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
   <div class="container flex flex-wrap items-center justify-between mx-auto">
     <a href="#" class="flex items-center">
