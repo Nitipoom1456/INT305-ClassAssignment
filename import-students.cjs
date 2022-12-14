@@ -1,3 +1,4 @@
+const { Timestamp } = require("firebase/firestore")
 var admin = require("firebase-admin");
 const { getFirestore } = require('firebase-admin/firestore')
 
@@ -402,7 +403,8 @@ students.forEach(function(obj){
         Major: obj.Major,
         GPAX: obj.GPAX,
         Year: obj.Year,
-        dob: obj.dob,
+        // dob: Timestamp.fromDate(new Date(obj.dob.seconds*1000)),
+        dob: new Timestamp(obj.dob.seconds, obj.dob.nanoseconds).toDate(),
         courseRegistered: obj.courseRegistered,
         nation: obj.nation,
         graduated: obj.graduated,
