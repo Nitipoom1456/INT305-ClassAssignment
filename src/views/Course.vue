@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onBeforeMount, watch } from 'vue'
-import { useRoute } from "vue-router"
 import { collection, query, where, getDocs, getCountFromServer, orderBy, startAt, endAt, limit } from "firebase/firestore"
 import db from "../firebase/init.js"
 import CourseList from '../components/CourseList.vue'
@@ -21,7 +20,6 @@ const getStartWithcs = async () => {
     snap(qry)
 }
 
-
 const snap = async (qry) => {
     const coursesSnap = await getDocs(qry)
     courses.value = []
@@ -39,12 +37,15 @@ const getNumCredit3 = async () => {
     aggData.value = snapshot.data().count
 }
 
-
 onBeforeMount(() => {
+    state.value = 0
     getAllCourse()
 })
 
 const changeState = () => {
+    if(state.value == 0){
+        getAllCourse()
+    }
     if(state.value == 1){
         getNumCredit3()
     }
@@ -60,7 +61,7 @@ watch(() => state.value, changeState)
 <template>
     <div class="flex">
         <div class="m-5 min-w-max w-1/2">
-            <p class="text-2xl font-bold text-center">Query</p>
+            <p class="text-2xl font-bold text-center">Course Query</p>
             <p class="text-lg cursor-pointer hover:text-blue-600" @click="state = 0">Get all courses.</p>
             <p class="text-lg cursor-pointer hover:text-blue-600" @click="state = 1">Get number of courses that have 3 credit.</p>
             <p class="text-lg cursor-pointer hover:text-blue-600" @click="state = 2">Get courses are course id start with 'cs' limit 3.</p>
