@@ -1,7 +1,7 @@
 <script setup>
 import StudentCard from '../components/StudentCard.vue';
 import { ref, onBeforeMount, watch } from 'vue'
-import { collection, query, where, getDocs, getCountFromServer } from "firebase/firestore"
+import { collection, query, where, getDocs, getCountFromServer, orderBy } from "firebase/firestore"
 import db from "../firebase/init.js"
 import StudentAdd from '../components/StudentAdd.vue';
 import aggResult from '../components/aggResult.vue';
@@ -34,6 +34,11 @@ const getWhoRegisint105andint205 = async () => {
     snap(qry)
 }
 
+const getUkbyFname = async () => {
+    const qry = query(collection(db, "students"), where("nation", "==", "United Kingdom"), orderBy("firstname"))
+    snap(qry)
+}
+
 const snap = async (qry) => {
     const studentsSnap = await getDocs(qry)
     students.value = []
@@ -50,6 +55,7 @@ const snap = async (qry) => {
         })
         students.value.push(studentdata)
     })
+    console.log(students.value);
 }
 
 onBeforeMount(() => {
@@ -69,6 +75,9 @@ const changeState = () => {
     }
     else if (state.value == 4) {
         getWhoRegisint105andint205()
+    }
+    else if (state.value == 5) {
+        getUkbyFname()
     }
 }
 
@@ -93,7 +102,7 @@ const showDetail = (stu) => {
                 students that major is Information Technology and Already graduated.</p>
             <p class="text-lg cursor-pointer hover:text-blue-600" @click="state = 4;detail = false">Get students that
                 have only registered int105 and int205.</p>
-            <!-- <p class="text-lg cursor-pointer hover:text-blue-600" @click="state = 5">Get students that have registered int105 and int205.</p> -->
+            <p class="text-lg cursor-pointer hover:text-blue-600" @click="state = 5;detail = false">Get students are nation is United Kingdom sort by firstname.</p>
         </div>
         <div class="grid grid-cols-2 gap-4 items-center  m-5 w-1/2">
             <StudentCard v-if="state==0 && detail == false" v-for="student in students" :key="student.id"
@@ -104,6 +113,8 @@ const showDetail = (stu) => {
             <aggResult v-else-if="state==3 && detail == false" :data="aggData" />
             <StudentCard v-else-if="state==4 && detail == false" v-for="student in students" :student="student"
                 @delete-student="getWhoRegisint105andint205()" @detail="showDetail" />
+            <StudentCard v-else-if="state==5 && detail == false" v-for="student in students" :student="student"
+                @delete-student="getUkbyFname()" @detail="showDetail" />
             <cardDetails v-if="detail" :data="currStudent" @go-back="detail = !detail" />
         </div>
     </div>

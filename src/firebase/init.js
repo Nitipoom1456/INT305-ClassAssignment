@@ -6,12 +6,7 @@ import { getFirestore } from "firebase/firestore" ;
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBb6JeGmzr72bYs-hXtkKqhglvP9CS8cO0",
-    authDomain: "stupidproject-8a898.firebaseapp.com",
-    projectId: "stupidproject-8a898",
-    storageBucket: "stupidproject-8a898.appspot.com",
-    messagingSenderId: "934520311698",
-    appId: "1:934520311698:web:99dd7f6a0a0b7e4ecbfb4b"
+    
 };
 
 
